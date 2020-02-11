@@ -1,0 +1,5 @@
+*.db
+
+/apikey.txt
+
+/modules/__pycache__
