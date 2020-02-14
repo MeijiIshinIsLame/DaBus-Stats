@@ -13,6 +13,9 @@ def calculate_minutes_off(estimated_time, schedule_time):
 	mins_off = time_off.total_seconds() / 60
 	return mins_off
 
+def clear_text_file(filename):
+	open(filename, "w").close()
+
 #est = datetime.strptime("2/10/2020 12:13 AM", "%m/%d/%Y %I:%M %p")
 #sce = datetime.strptime("2/9/2020 11:59 PM", "%m/%d/%Y %I:%M %p")
 

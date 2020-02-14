@@ -1,29 +1,31 @@
 import requests
+import os
 import time
 from lxml import etree
 from datetime import datetime
 
 import modules.helpers as helpers
 
-API_KEY = "my api key lmao no environs yet kek"
+API_KEY = os.getenv("BUS_API_KEY")
 
 class Arrival:
 
 	stdp_number = ""
 	arrival_id = ""
 	route_number = ""
+	direction = ""
 	estimated = 0
 	canceled = 0
 	arrival_estimated = ""
 	arrival_scheduled = ""
 	arrived = False
 	minutes_off = 0
-	added = False
 
-	def __init__(self, _stop_number, _arrival_id, _route_number, _canceled, _estimated, _arrival_estimated, _arrival_scheduled):
+	def __init__(self, _stop_number, _arrival_id, _route_number,_direction, _canceled, _estimated, _arrival_estimated, _arrival_scheduled):
 		self.stop_number = str(_stop_number)
 		self.arrival_id = str(_arrival_id)
 		self.route_number = str(_route_number)
+		self.direction = str(_direction)
 		self.canceled = str(_canceled)
 		self.estimated = str(_estimated)
 		self.arrival_estimated = _arrival_estimated
@@ -44,12 +46,12 @@ class Arrival:
 		print("stop_number: ", self.stop_number)
 		print("arrival_id: ", self.arrival_id)
 		print("route_number: ", self.route_number)
+		print("direction ", self.direction)
 		print("estimated: ", self.estimated)
 		print("arrival_estimated: ", self.arrival_estimated)
 		print("arrival_scheduled: ", self.arrival_scheduled)
 		print("arrived: ", self.arrived)
 		print("minutes_off: ", self.minutes_off)
-		print("added: ", self.added)
 		print("canceled: ", self.canceled)
 
 
@@ -65,6 +67,7 @@ def get_arrival_list(stopnum):
 	for item in arrivals:
 		arrival_id = item.find('id').text
 		route_number = item.find('route').text
+		direction = item.find('direction').text
 		estimated = item.find('estimated').text
 		canceled = item.find('canceled').text
 		date = item.find('date').text
@@ -80,7 +83,7 @@ def get_arrival_list(stopnum):
 			arrival_scheduled = datetime.strptime(arrival_scheduled, "%m/%d/%Y %I:%M %p")
 
 		#create new arrival, and add to dictionary with arrival_id as the key
-		new_arrival = Arrival(stopnum, arrival_id, route_number, canceled, estimated, arrival_estimated, arrival_scheduled)
+		new_arrival = Arrival(stopnum, arrival_id, route_number, direction, canceled, estimated, arrival_estimated, arrival_scheduled)
 		arrival_list[new_arrival.arrival_id] = new_arrival
 
 	return arrival_list
@@ -113,8 +116,6 @@ def finalize_popped_arrivals(arrival_list):
 				print("cannot calculate because of missing values")
 			else:
 				v.minutes_off = helpers.calculate_minutes_off(v.arrival_estimated, v.arrival_scheduled)
-				print("MINUTES OFF IS", v.minutes_off, "\n\n")
-				v.pretty_print()
 
 	return arrival_list
 

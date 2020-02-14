@@ -26,6 +26,7 @@ def update_arrivals_db(arrival_dict):
 													 lastUpdated TEXT, 
 													 stopNumber TEXT, 
 													 route TEXT,
+													 direction TEXT,
 													 canceled TEXT,
 													 minsOff REAL)""")
 
@@ -42,12 +43,11 @@ def update_arrivals_db(arrival_dict):
 		 	print("Added to db\n\n")
 		 	v.pretty_print()
 
-		 	params = (today_date, last_updated, v.stop_number, v.route_number, v.canceled, v.minutes_off)
-		 	query = ("""INSERT INTO arrivals (insertDate, lastUpdated, stopNumber, route, canceled, minsOff)
-	    				 VALUES (?, ?, ? , ?, ?, ?)""")
+		 	params = (today_date, last_updated, v.stop_number, v.route_number, v.direction, v.canceled, v.minutes_off)
+		 	query = ("""INSERT INTO arrivals (insertDate, lastUpdated, stopNumber, route, direction, canceled, minsOff)
+	    				 VALUES (?, ?, ? , ?, ?, ?, ?)""")
 
 		 	c.execute(query, params)
-		 	v.added = True
 		 	conn.commit()
 	conn.close()
 
