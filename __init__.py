@@ -50,7 +50,6 @@ def track_data(stopnum):
 			popped_arrivals = {}
 
 def make_stop_list(numstops):
-
 	stops_to_track = []
 	total_stops_file = 'stops.txt'
 	skip_file = 'stops_completed.txt'
@@ -81,7 +80,6 @@ def make_stop_list(numstops):
 
 
 if __name__ == "__main__":
-
 	numstops = 4
 	stops_to_track  = make_stop_list(numstops)
 

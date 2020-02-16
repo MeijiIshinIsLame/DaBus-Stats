@@ -107,7 +107,6 @@ def update_arrivals(old_arrival_list, stopnum):
 	return final_arrival_list, popped_arrivals
 
 def finalize_popped_arrivals(arrival_list):
-
 	for k, v in arrival_list.items():
 		if v.arrived == True:
 			if estimated_and_scheduled_time_unavailable(v):
