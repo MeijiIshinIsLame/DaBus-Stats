@@ -22,12 +22,29 @@ arrival_dict["1"].arrived = True
 arrival_dict["1"].minutes_off = 4
 arrival_dict["1"].added = False
 
+ssl_cert_path = "client-cert.pem"
+ssl_key_path = "client-key.pem"
+ssl_root_cert_path = "server-ca.pem"
+
+with open(ssl_cert_path, 'w+') as f:
+	f.write(os.environ["SSL_CERT"])
+
+with open(ssl_key_path, 'w+') as f:
+	f.write(os.environ["SSL_KEY"])
+
+with open(ssl_root_cert_path, 'w+') as f:
+	f.write(os.environ["SSL_ROOT_CERT"])
+
 def update_arrivals_db(arrival_dict):
 	conn = psycopg2.connect(database=str(os.environ["DB_NAME"]),
 							user=str(os.environ["DB_USERNAME"]),
 							password=str(os.environ["DB_PASSWORD"]),
 							host=str(os.environ["DB_HOSTNAME"]),
-							port=str(os.environ["DB_PORT"]))
+							port=str(os.environ["DB_PORT"]),
+							sslcert=ssl_cert_path,
+							sslmode=str(os.environ["SSL_MODE"]),
+							sslrootcert=ssl_root_cert_path,
+							sslkey=ssl_key_path)
 	c = conn.cursor()
 
 	c.execute("""CREATE TABLE IF NOT EXISTS arrivals(insertDate TEXT, 
