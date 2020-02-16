@@ -13,7 +13,6 @@ import modules.process_data as db
 def track_data(stopnum):
 	arrival_list = arrivals.get_arrival_list(stopnum)
 	print(arrival_list)
-	print("original arrival list\n")
 
 	i = 0
 
