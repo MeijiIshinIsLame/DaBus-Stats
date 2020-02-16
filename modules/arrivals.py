@@ -90,6 +90,7 @@ def get_arrival_list(stopnum):
 	
 
 def update_arrivals(old_arrival_list, stopnum):
+	print(API_KEY)
 	new_arrival_list = get_arrival_list(stopnum)
 	popped_arrivals = {}
 
