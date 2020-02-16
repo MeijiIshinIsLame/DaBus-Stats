@@ -4,6 +4,8 @@ import os
 
 import modules.arrivals as arrivals
 
+print("ARE WE GOING OR WHAT")
+
 stopnum =  "999"
 arrival_id = 1509831815
 route_number =  13
