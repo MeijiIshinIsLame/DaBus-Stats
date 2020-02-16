@@ -1,3 +1,5 @@
 lxml
 psycopg2
 requests
+datetime
+pytz
