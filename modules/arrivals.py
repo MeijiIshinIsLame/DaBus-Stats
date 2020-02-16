@@ -6,7 +6,7 @@ from datetime import datetime
 
 import modules.helpers as helpers
 
-API_KEY = str(os.environ.get("BUS_API_KEY"))
+API_KEY = str(os.environ["BUS_API_KEY"])
 
 class Arrival:
 

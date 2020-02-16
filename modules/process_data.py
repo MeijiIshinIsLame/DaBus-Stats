@@ -21,11 +21,11 @@ import modules.arrivals as arrivals
 # arrival_dict["1"].added = False
 
 def update_arrivals_db(arrival_dict):
-	conn = psycopg2.connect(database=str(os.environ.get("DB_NAME")),
-							user=str(os.environ.get("DB_USERNAME")),
-							password=str(os.environ.get("DB_PASSWORD")),
-							host=str(os.environ.get("DB_HOSTNAME")),
-							port=str(os.environ.get("DB_PORT")))
+	conn = psycopg2.connect(database=str(os.environ["DB_NAME"]),
+							user=str(os.environ["DB_USERNAME"]),
+							password=str(os.environ["DB_PASSWORD"]),
+							host=str(os.environ["DB_HOSTNAME"]),
+							port=str(os.environ["DB_PORT"]))
 	c = conn.cursor()
 
 	c.execute("""CREATE TABLE IF NOT EXISTS arrivals(insertDate TEXT, 
