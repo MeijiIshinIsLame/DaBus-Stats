@@ -15,22 +15,34 @@ def track_data(stopnum):
 	print(arrival_list)
 	print("original arrival list\n")
 
-	for k, v in arrival_list.items():
-		v.pretty_print()
+	i = 0
 
-	print("----------------------")
+	for k, v in arrival_list.items():
+		i += 1
+
+	print("Tracking for:", stopnum, "arrivals: ", i, "\n----------------------\n\n")
 
 	while True:
+		#kill thread when 2 AM is hit
+		if helpers.restart_time_hit():
+			time.sleep(120)
+			print("Thread restarted!")
+			return ""
+
 		next_arrival_list, popped_arrivals = arrivals.update_arrivals(arrival_list, stopnum)
 
 		time.sleep(20)
 
-		print("popped arrivals\n")
+		for k, v in next_arrival_list.items():
+			print("\nStop: ", v.stop_number)
+			break
 
-		for k, v in popped_arrivals.items():
-			v.pretty_print()
+		if popped_arrivals:
+			print("\npopped arrivals\n")
+			for k, v in popped_arrivals.items():
+				v.pretty_print()
 
-		print("----------------------")
+			print("----------------------")
 
 		if popped_arrivals: 
 			popped_arrivals = arrivals.finalize_popped_arrivals(popped_arrivals)
@@ -70,12 +82,22 @@ def make_stop_list(numstops):
 
 if __name__ == "__main__":
 
-	numstops = 30
-	stops_to_track = make_stop_list(numstops)
+	numstops = 4
+	stops_to_track  = make_stop_list(numstops)
 
 	for stop in stops_to_track:
-		_thread.start_new_thread(track_data, (stop,))
-		time.sleep(10)
+		_thread.start_new_thread(track_data, (stop, ))
+		time.sleep(3)
 
 	while True:
-		pass
+		if helpers.restart_time_hit():
+			stops_to_track = make_stop_list(numstops)
+			print("\n\nrestarting......\n\n")
+
+			time.sleep(120)
+
+			#Threads are killed when they return a value
+			#hence why I don't need to kill the already existing threads, because they return at restart time.
+			for stop in stops_to_track:
+				_thread.start_new_thread(track_data, (stop, ))
+				time.sleep(3)

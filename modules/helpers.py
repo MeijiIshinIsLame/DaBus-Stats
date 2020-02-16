@@ -1,4 +1,5 @@
 from datetime import datetime
+from pytz import timezone
 
 def merge_dictionaries(dict1, dict2):
 	for k, v in dict2.items():
@@ -12,6 +13,10 @@ def calculate_minutes_off(estimated_time, schedule_time):
 	time_off = estimated_time - schedule_time
 	mins_off = time_off.total_seconds() / 60
 	return mins_off
+
+def restart_time_hit():
+	now = datetime.now(timezone('US/Hawaii'))
+	return now.hour == 2 and now.minute == 0
 
 def clear_text_file(filename):
 	open(filename, "w").close()

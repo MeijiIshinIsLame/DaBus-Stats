@@ -6,11 +6,11 @@ from datetime import datetime
 
 import modules.helpers as helpers
 
-API_KEY = os.getenv("BUS_API_KEY")
+API_KEY = str(os.environ.get("BUS_API_KEY"))
 
 class Arrival:
 
-	stdp_number = ""
+	stop_number = ""
 	arrival_id = ""
 	route_number = ""
 	direction = ""
@@ -109,14 +109,11 @@ def update_arrivals(old_arrival_list, stopnum):
 def finalize_popped_arrivals(arrival_list):
 
 	for k, v in arrival_list.items():
-
 		if v.arrived == True:
-
 			if estimated_and_scheduled_time_unavailable(v):
 				print("cannot calculate because of missing values")
 			else:
 				v.minutes_off = helpers.calculate_minutes_off(v.arrival_estimated, v.arrival_scheduled)
-
 	return arrival_list
 
 #there's gotta be a better way to do this
