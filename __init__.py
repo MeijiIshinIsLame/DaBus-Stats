@@ -79,7 +79,7 @@ def make_stop_list(numstops):
 
 
 if __name__ == "__main__":
-	numstops = 30
+	numstops = 150
 	stops_to_track  = make_stop_list(numstops)
 
 	for stop in stops_to_track:
