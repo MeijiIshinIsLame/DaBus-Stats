@@ -26,9 +26,9 @@ arrival_dict["1"].added = False
 def update_arrivals_db(arrival_dict):
 
 	#create ssl files
-	ssl_cert_path = "client-cert.pem"
-	ssl_key_path = "client-key.pem"
-	ssl_root_cert_path = "server-ca.pem"
+	ssl_cert_path = "/client-cert.pem"
+	ssl_key_path = "/client-key.pem"
+	ssl_root_cert_path = "/server-ca.pem"
 
 	if not os.path.exists(ssl_cert_path.strip()):
 		file_contents = ""
