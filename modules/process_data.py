@@ -30,7 +30,7 @@ def update_arrivals_db(arrival_dict):
 	ssl_key_path = "/client-key.pem"
 	ssl_root_cert_path = "/server-ca.pem"
 
-	if not os.path.exists(ssl_cert_path.strip()):
+	if not os.path.exists(ssl_cert_path):
 		file_contents = ""
 		with open(ssl_cert_path, 'w+') as f:
 			f.write(os.environ["SSL_CERT"])
@@ -38,11 +38,11 @@ def update_arrivals_db(arrival_dict):
 		print(file_contents)
 
 
-	if not os.path.exists(ssl_key_path.strip()):
+	if not os.path.exists(ssl_key_path):
 		with open(ssl_key_path, 'w+') as f:
 			f.write(os.environ["SSL_KEY"])
 
-	if not os.path.exists(ssl_root_cert_path.strip()):
+	if not os.path.exists(ssl_root_cert_path):
 		with open(ssl_root_cert_path, 'w+') as f:
 			f.write(os.environ["SSL_ROOT_CERT"])
 
