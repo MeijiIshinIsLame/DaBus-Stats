@@ -24,18 +24,16 @@ arrival_dict["1"].minutes_off = 4
 arrival_dict["1"].added = False
 
 def update_arrivals_db(arrival_dict):
+	cwd = os.getcwd()
 
 	#create ssl files
-	ssl_cert_path = "/client-cert.pem"
-	ssl_key_path = "/client-key.pem"
-	ssl_root_cert_path = "/server-ca.pem"
+	ssl_cert_path = os.path.join(cwd, "client-cert.pem")
+	ssl_key_path = os.path.join(cwd, "client-key.pem")
+	ssl_root_cert_path = os.path.join(cwd, "server-ca.pem")
 
 	if not os.path.exists(ssl_cert_path):
-		file_contents = ""
 		with open(ssl_cert_path, 'w+') as f:
 			f.write(os.environ["SSL_CERT"])
-			file_contents = f.read()
-		print(file_contents)
 
 
 	if not os.path.exists(ssl_key_path):
