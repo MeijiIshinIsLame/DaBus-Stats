@@ -52,7 +52,7 @@ def update_arrivals_db(arrival_dict):
 	c = conn.cursor()
 
 	c.execute("""CREATE TABLE IF NOT EXISTS arrivals(insertDate DATE, 
-													 lastUpdated DATETIME, 
+													 lastUpdated TIMESTAMP, 
 													 stopNumber TEXT, 
 													 route TEXT,
 													 direction TEXT,
