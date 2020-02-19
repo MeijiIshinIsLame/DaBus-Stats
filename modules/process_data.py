@@ -65,7 +65,7 @@ def update_arrivals_db(arrival_dict):
 		 if arrivals.estimated_and_scheduled_time_unavailable(v):
 		 	print("did not add to db")
 		 else:
-		 	last_updated = datetime.now(timezone('US/Hawaii')).strftime("%m/%d/%Y %I:%M:%S")
+		 	last_updated = datetime.now(timezone('US/Hawaii')).strftime("%m-%d-%Y %I:%M:%S")
 
 		 	params = (today_date, last_updated, v.stop_number, v.route_number, v.direction, v.canceled, v.minutes_off)
 		 	query = ("""INSERT INTO arrivals (insertDate, lastUpdated, stopNumber, route, direction, canceled, minsOff)

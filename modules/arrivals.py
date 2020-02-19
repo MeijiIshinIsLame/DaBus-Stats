@@ -77,10 +77,10 @@ def get_arrival_list(stopnum):
 		#i know, this is stupid...but their estimated returns as 2 sometimes okay.
 		if estimated is "1":
 			arrival_estimated = date + " " + item.find('stopTime').text
-			arrival_estimated = datetime.strptime(arrival_estimated.replace("/", "-"), "%m-%d-%Y %I:%M %p")
+			arrival_estimated = datetime.strptime(arrival_estimated, "%m/%d/%Y %I:%M %p")
 		else:
 			arrival_scheduled = date + " " + item.find('stopTime').text
-			arrival_scheduled = datetime.strptime(arrival_scheduled.replace("/", "-"), "%m-%d-%Y %I:%M %p")
+			arrival_scheduled = datetime.strptime(arrival_scheduled, "%m/%d/%Y %I:%M %p")
 
 		#create new arrival, and add to dictionary with arrival_id as the key
 		new_arrival = Arrival(stopnum, arrival_id, route_number, direction, canceled, estimated, arrival_estimated, arrival_scheduled)
