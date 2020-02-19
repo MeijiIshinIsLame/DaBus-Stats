@@ -32,6 +32,7 @@ def update_arrivals_db(arrival_dict):
 	ssl_root_cert_path = os.path.join(cwd, "server-ca.pem")
 
 	if not os.path.exists(ssl_cert_path):
+		print("FUCK COME ON/n.n.n.n/\n\n\n\n\n\n")
 		with open(ssl_cert_path, 'w+') as f:
 			f.write(os.environ["SSL_CERT"])
 
