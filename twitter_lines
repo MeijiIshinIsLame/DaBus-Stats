@@ -1,0 +1,7 @@
+50|We tracked {num_of_arrivals} at stop {stop} on {date}!
+50|{num_canceled} busses were canceled on {date}!
+4|Out of {num_of_arrivals} arrivals tracked since {date}, The average minutes late was {mins_late} minutes, and the average minutes early was {mins_early} minutes! 
+
+
+
+#SELECT AVG(minsoff) FROM arrivals WHERE insertdate='02-16-2020' AND minsoff <= 0

@@ -5,23 +5,23 @@ from pytz import timezone
 
 import modules.arrivals as arrivals
 
-# print("ARE WE GOING OR WHAT")
+print("ARE WE GOING OR WHAT")
 
-# stopnum =  "999"
-# arrival_id = 1509831815
-# route_number =  13
-# direction = "Eastbound"
-# estimated = 1
-# canceled = "0"
-# arrival_estimated = "2020-02-09 22:08:00"
-# arrival_scheduled = "2020-02-09 22:04:00"
+stopnum =  "999"
+arrival_id = 1509831815
+route_number =  13
+direction = "Eastbound"
+estimated = 1
+canceled = "0"
+arrival_estimated = "2020-02-09 22:08:00"
+arrival_scheduled = "2020-02-09 22:04:00"
 
-# arrival_dict = {}
-# arrival_dict["1"] = arrivals.Arrival(stopnum, arrival_id, route_number, direction, canceled, estimated, arrival_estimated, arrival_scheduled)
+arrival_dict = {}
+arrival_dict["1"] = arrivals.Arrival(stopnum, arrival_id, route_number, direction, canceled, estimated, arrival_estimated, arrival_scheduled)
 
-# arrival_dict["1"].arrived = True
-# arrival_dict["1"].minutes_off = 4
-# arrival_dict["1"].added = False
+arrival_dict["1"].arrived = True
+arrival_dict["1"].minutes_off = 4
+arrival_dict["1"].added = False
 
 def update_arrivals_db(arrival_dict):
 
@@ -51,8 +51,8 @@ def update_arrivals_db(arrival_dict):
 							sslkey=ssl_key_path)
 	c = conn.cursor()
 
-	c.execute("""CREATE TABLE IF NOT EXISTS arrivals(insertDate TEXT, 
-													 lastUpdated TEXT, 
+	c.execute("""CREATE TABLE IF NOT EXISTS arrivals(insertDate DATE, 
+													 lastUpdated DATETIME, 
 													 stopNumber TEXT, 
 													 route TEXT,
 													 direction TEXT,
@@ -75,4 +75,4 @@ def update_arrivals_db(arrival_dict):
 		 	conn.commit()
 	conn.close()
 
-# update_arrivals_db(arrival_dict)
+update_arrivals_db(arrival_dict)
