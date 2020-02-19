@@ -77,24 +77,7 @@ def make_stop_list(numstops):
 
 	return stops_to_track
 
-def create_ssl_certs():
-	ssl_cert_path = "client-cert.pem"
-	ssl_key_path = "client-key.pem"
-	ssl_root_cert_path = "server-ca.pem"
-
-	with open(ssl_cert_path, 'w+') as f:
-		f.write(os.environ["SSL_CERT"])
-
-	with open(ssl_key_path, 'w+') as f:
-		f.write(os.environ["SSL_KEY"])
-
-	with open(ssl_root_cert_path, 'w+') as f:
-		f.write(os.environ["SSL_ROOT_CERT"])
-
-
 if __name__ == "__main__":
-	create_ssl_certs()
-
 	numstops = 45
 	stops_to_track  = make_stop_list(numstops)
 

@@ -23,11 +23,22 @@ arrival_dict["1"].arrived = True
 arrival_dict["1"].minutes_off = 4
 arrival_dict["1"].added = False
 
+#todo - make ssl certs write only 1 time at startup
+#heroku filepaths are making this more difficult than it should be...
 def update_arrivals_db(arrival_dict):
 	#created in __init__.py
 	ssl_cert_path = "client-cert.pem"
 	ssl_key_path = "client-key.pem"
 	ssl_root_cert_path = "server-ca.pem"
+
+	with open(ssl_cert_path, 'w+') as f:
+		f.write(os.environ["SSL_CERT"])
+
+	with open(ssl_key_path, 'w+') as f:
+		f.write(os.environ["SSL_KEY"])
+
+	with open(ssl_root_cert_path, 'w+') as f:
+		f.write(os.environ["SSL_ROOT_CERT"])
 
 	conn = psycopg2.connect(database=str(os.environ["DB_NAME"]),
 							user=str(os.environ["DB_USERNAME"]),
