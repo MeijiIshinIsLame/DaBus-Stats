@@ -25,9 +25,9 @@ arrival_dict["1"].added = False
 
 def update_arrivals_db(arrival_dict):
 	#created in __init__.py
-	ssl_cert_path = os.path.join(cwd, "client-cert.pem")
-	ssl_key_path = os.path.join(cwd, "client-key.pem")
-	ssl_root_cert_path = os.path.join(cwd, "server-ca.pem")
+	ssl_cert_path = "client-cert.pem"
+	ssl_key_path = "client-key.pem"
+	ssl_root_cert_path = "server-ca.pem"
 
 	conn = psycopg2.connect(database=str(os.environ["DB_NAME"]),
 							user=str(os.environ["DB_USERNAME"]),
