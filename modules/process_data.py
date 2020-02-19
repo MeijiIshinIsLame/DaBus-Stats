@@ -24,24 +24,10 @@ arrival_dict["1"].minutes_off = 4
 arrival_dict["1"].added = False
 
 def update_arrivals_db(arrival_dict):
-	cwd = os.getcwd()
-
-	#create ssl files
+	#created in __init__.py
 	ssl_cert_path = os.path.join(cwd, "client-cert.pem")
 	ssl_key_path = os.path.join(cwd, "client-key.pem")
 	ssl_root_cert_path = os.path.join(cwd, "server-ca.pem")
-
-	if not os.path.exists(ssl_cert_path):
-		with open(ssl_cert_path, 'w+') as f:
-			f.write(os.environ["SSL_CERT"])
-
-	if not os.path.exists(ssl_key_path):
-		with open(ssl_key_path, 'w+') as f:
-			f.write(os.environ["SSL_KEY"])
-
-	if not os.path.exists(ssl_root_cert_path):
-		with open(ssl_root_cert_path, 'w+') as f:
-			f.write(os.environ["SSL_ROOT_CERT"])
 
 	conn = psycopg2.connect(database=str(os.environ["DB_NAME"]),
 							user=str(os.environ["DB_USERNAME"]),
